@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rhinegold Studio</title>
+  <meta name="description" content="Rhinegold Studio — Independent mobile games & apps. Play more. Learn more. Explore more."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy-deep:   #060c1a;
+      --navy:        #0a1428;
+      --navy-mid:    #0e1c3a;
+      --navy-light:  #1a3268;
+      --blue-water:  #1e3f88;
+      --gold-light:  #FFF8C0;
+      --gold:        #F0C830;
+      --gold-mid:    #C89010;
+      --gold-dark:   #8a5e00;
+      --white:       #ffffff;
+      --text-muted:  #7090b8;
+      --text-dim:    #4a6090;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy-deep);
+      color: var(--white);
+      font-family: 'EB Garamond', Georgia, serif;
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 2rem;
+    }
+
+    /* Animated star field */
+    .stars {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      background: #fff;
+      border-radius: 50%;
+      animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: var(--min-op, 0.1); }
+      50%       { opacity: var(--max-op, 0.6); }
+    }
+
+    /* Animated wave background */
+    .wave-bg {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 42%;
+      pointer-events: none;
+    }
+    .wave-layer {
+      position: absolute;
+      bottom: 0; left: -10%; right: -10%;
+      height: 100%;
+    }
+    .wave-layer svg { width: 120%; height: 100%; }
+
+    .wave-layer:nth-child(1) { animation: waveDrift 12s ease-in-out infinite; opacity: 0.9; }
+    .wave-layer:nth-child(2) { animation: waveDrift 16s ease-in-out infinite reverse; opacity: 0.55; bottom: -2%; }
+    .wave-layer:nth-child(3) { animation: waveDrift 20s ease-in-out infinite; opacity: 0.3; bottom: -4%; }
+
+    @keyframes waveDrift {
+      0%,100% { transform: translateX(0); }
+      50%      { transform: translateX(4%); }
+    }
+
+    /* Hero content */
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      animation: fadeUp 1.4s ease both;
+      margin-bottom: 8vh;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Inline SVG logo */
+    .logo-mark {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 2rem;
+      filter: drop-shadow(0 8px 32px rgba(200,140,0,0.4));
+      animation: fadeUp 1.4s ease 0.1s both;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      overflow: visible;
+      padding-bottom: 0.05em;
+      animation: fadeUp 1.4s ease 0.2s both;
+    }
+
+    .hero-title .title-rhinegold {
+      display: block;
+      background: linear-gradient(160deg, var(--gold-light) 0%, var(--gold) 35%, var(--gold-mid) 70%, var(--gold-dark) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 40px rgba(200,140,0,0.25));
+    }
+
+    .hero-title .title-studio {
+      display: block;
+      color: var(--white);
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      font-size: 0.48em;
+      opacity: 0.85;
+      margin-top: 0.1em;
+      -webkit-text-fill-color: var(--white);
+    }
+
+    .hero-subtitle {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      letter-spacing: 0.25em;
+      color: var(--white);
+      opacity: 0.6;
+      margin-top: 0.6rem;
+      text-transform: uppercase;
+      animation: fadeUp 1.4s ease 0.35s both;
+    }
+
+    .hero-divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+      margin: 1.8rem auto;
+      animation: fadeUp 1.4s ease 0.45s both;
+    }
+
+    .hero-tagline {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      font-style: italic;
+      animation: fadeUp 1.4s ease 0.55s both;
+      position: relative;
+      z-index: 10;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.35;
+      animation: fadeUp 1.4s ease 1.2s both;
+    }
+    .scroll-hint span {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .scroll-arrow {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--gold-mid), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.3; transform: scaleY(1); }
+      50%      { opacity: 0.8; transform: scaleY(1.15); }
+    }
+
+    /* ─── SECTIONS ─── */
+    section {
+      position: relative;
+      padding: 7rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-mid);
+      margin-bottom: 1.2rem;
+      opacity: 0.8;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1.8rem;
+    }
+
+    .section-title span {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-mid));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-body {
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      line-height: 1.8;
+      color: var(--text-muted);
+      max-width: 660px;
+    }
+
+    /* Gold rule */
+    .gold-rule {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--navy-light) 30%, var(--navy-light) 70%, transparent);
+      margin: 0;
+    }
+
+    /* ─── ABOUT ─── */
+    .about-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    @media (max-width: 680px) {
+      .about-section { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .about-visual {
+      display: flex;
+      justify-content: center;
+    }
+    .about-ring {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,144,16,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .about-ring::before {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,144,16,0.12);
+    }
+    .about-ring-logo {
+      width: 140px;
+      height: 140px;
+      filter: drop-shadow(0 4px 24px rgba(200,140,0,0.35));
+    }
+
+    /* ─── GAMES ─── */
+    .game-card {
+      background: linear-gradient(135deg, #0e1c3a 0%, #0a1428 100%);
+      border: 1px solid rgba(200,144,16,0.15);
+      border-radius: 20px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 2rem;
+      align-items: start;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,144,16,0.4), transparent);
+    }
+    .game-card:hover {
+      border-color: rgba(200,144,16,0.35);
+      transform: translateY(-3px);
+    }
+
+    .game-icon {
+      width: 88px;
+      height: 88px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #1e3168, #0e1d45);
+      border: 1px solid rgba(200,144,16,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      flex-shrink: 0;
+    }
+
+    .game-info { padding-top: 0.3rem; }
+
+    .game-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .game-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 1.2rem;
+    }
+
+    .coming-soon-badge {
+      display: inline-block;
+      padding: 0.3rem 0.9rem;
+      border: 1px solid var(--gold-mid);
+      border-radius: 20px;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.8;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-section {
+      text-align: center;
+      padding-bottom: 5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1.4rem;
+      border: 1px solid rgba(200,144,16,0.2);
+      border-radius: 40px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 0.05em;
+      transition: all 0.25s;
+      background: rgba(14,28,58,0.5);
+    }
+    .social-link:hover {
+      border-color: rgba(200,144,16,0.5);
+      color: var(--gold);
+      background: rgba(14,28,58,0.9);
+      transform: translateY(-2px);
+    }
+    .social-link svg {
+      width: 18px; height: 18px;
+      fill: currentColor;
+      flex-shrink: 0;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+    footer a { color: var(--text-dim); text-decoration: none; }
+    footer a:hover { color: var(--gold-mid); }
+
+    /* Fade-in on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Fallback: ensure content visible if JS fails */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+
+  <!-- Stars -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Waves -->
+  <div class="wave-bg">
+    <div class="wave-layer">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#1a3878" fill-opacity="1"
+          d="M0,160 C180,120 360,200 540,160 C720,120 900,200 1080,160 C1260,120 1380,180 1440,160 L1440,320 L0,320 Z"/>
+      </svg>
+    </div>
+    <div class="wave-layer">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#0e2255" fill-opacity="1"
+          d="M0,200 C200,160 400,240 600,200 C800,160 1000,240 1200,200 C1350,170 1420,210 1440,200 L1440,320 L0,320 Z"/>
+      </svg>
+    </div>
+    <div class="wave-layer">
+      <svg viewBox="0 0 1440 320" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#070e22" fill-opacity="1"
+          d="M0,240 C240,210 480,270 720,240 C960,210 1200,270 1440,240 L1440,320 L0,320 Z"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="hero-content">
+    <!-- Logo mark inline SVG -->
+    <div class="logo-mark">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="120" height="120">
+        <defs>
+          <linearGradient id="hNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#1a2d5e"/>
+            <stop offset="100%" style="stop-color:#0d1c40"/>
+          </linearGradient>
+          <linearGradient id="hGold" x1="20%" y1="0%" x2="80%" y2="100%">
+            <stop offset="0%"  style="stop-color:#FFF0A0"/>
+            <stop offset="18%" style="stop-color:#F2C840"/>
+            <stop offset="45%" style="stop-color:#D4980A"/>
+            <stop offset="72%" style="stop-color:#B07808"/>
+            <stop offset="100%" style="stop-color:#7a5000"/>
+          </linearGradient>
+          <linearGradient id="hSheen" x1="5%" y1="5%" x2="55%" y2="60%">
+            <stop offset="0%"  style="stop-color:#FFF8CC;stop-opacity:0.55"/>
+            <stop offset="100%" style="stop-color:#D4980A;stop-opacity:0"/>
+          </linearGradient>
+          <linearGradient id="hWater" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#2a4a9a"/>
+            <stop offset="100%" style="stop-color:#0e1d55"/>
+          </linearGradient>
+          <linearGradient id="hHorizon" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   style="stop-color:#C88800;stop-opacity:0"/>
+            <stop offset="35%"  style="stop-color:#FFE880;stop-opacity:0.7"/>
+            <stop offset="65%"  style="stop-color:#FFE880;stop-opacity:0.5"/>
+            <stop offset="100%" style="stop-color:#C88800;stop-opacity:0"/>
+          </linearGradient>
+          <radialGradient id="hGlow" cx="47%" cy="42%" r="52%">
+            <stop offset="0%"  style="stop-color:#C88800;stop-opacity:0.38"/>
+            <stop offset="100%" style="stop-color:#C88800;stop-opacity:0"/>
+          </radialGradient>
+          <filter id="hBlur"><feGaussianBlur stdDeviation="1.8"/></filter>
+          <clipPath id="hClip">
+            <rect x="20" y="20" width="360" height="360" rx="80"/>
+          </clipPath>
+        </defs>
+        <rect x="20" y="20" width="360" height="360" rx="80" fill="url(#hNavy)"/>
+        <g clip-path="url(#hClip)">
+          <rect x="20" y="20" width="360" height="360" fill="url(#hNavy)"/>
+          <ellipse cx="188" cy="182" rx="148" ry="132" fill="url(#hGlow)"/>
+          <circle cx="184" cy="168" r="128" fill="url(#hGold)"/>
+          <circle cx="184" cy="168" r="128" fill="url(#hSheen)"/>
+          <path d="M 20 228 Q 85 200 152 218 Q 218 236 282 212 Q 336 194 380 210 L 380 380 L 20 380 Z" fill="url(#hWater)"/>
+          <path d="M 20 228 Q 85 200 152 218 Q 218 236 282 212 Q 336 194 380 210"
+                fill="none" stroke="url(#hHorizon)" stroke-width="5" opacity="0.6" filter="url(#hBlur)"/>
+          <path d="M 20 228 Q 85 200 152 218 Q 218 236 282 212 Q 336 194 380 210"
+                fill="none" stroke="#8ab8e8" stroke-width="0.9" opacity="0.35"/>
+          <rect x="20" y="310" width="360" height="70" fill="#0a1530" opacity="0.35"/>
+        </g>
+        <rect x="20" y="20" width="360" height="360" rx="80" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.06"/>
+      </svg>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="title-rhinegold">rhinegold</span>
+      <span class="title-studio">studio</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline">play more. learn more. explore more.</p>
+  </div>
+
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- ─── ABOUT ─── -->
+<section>
+  <div class="about-section reveal">
+    <div>
+      <p class="section-label">About</p>
+      <h2 class="section-title">Crafted with <span>curiosity</span> & care</h2>
+      <p class="section-body">
+        rhinegold studio is an independent one-person studio building mobile games and apps that are worth your time.
+        Inspired by the depth and ambition of Wagner's <em>Das Rheingold</em>, I believe small studios can create
+        experiences that are genuinely surprising — from puzzle games that challenge your thinking to apps that help
+        you discover something new. I don't chase trends. I build things I'd love to play myself.
+      </p>
+    </div>
+    <div class="about-visual">
+      <div class="about-ring">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" class="about-ring-logo">
+          <defs>
+            <linearGradient id="aNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#1a2d5e"/>
+              <stop offset="100%" style="stop-color:#0d1c40"/>
+            </linearGradient>
+            <linearGradient id="aGold" x1="20%" y1="0%" x2="80%" y2="100%">
+              <stop offset="0%"  style="stop-color:#FFF0A0"/>
+              <stop offset="18%" style="stop-color:#F2C840"/>
+              <stop offset="45%" style="stop-color:#D4980A"/>
+              <stop offset="72%" style="stop-color:#B07808"/>
+              <stop offset="100%" style="stop-color:#7a5000"/>
+            </linearGradient>
+            <linearGradient id="aSheen" x1="5%" y1="5%" x2="55%" y2="60%">
+              <stop offset="0%"  style="stop-color:#FFF8CC;stop-opacity:0.55"/>
+              <stop offset="100%" style="stop-color:#D4980A;stop-opacity:0"/>
+            </linearGradient>
+            <linearGradient id="aWater" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#2a4a9a"/>
+              <stop offset="100%" style="stop-color:#0e1d55"/>
+            </linearGradient>
+            <linearGradient id="aHorizon" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   style="stop-color:#C88800;stop-opacity:0"/>
+              <stop offset="35%"  style="stop-color:#FFE880;stop-opacity:0.7"/>
+              <stop offset="65%"  style="stop-color:#FFE880;stop-opacity:0.5"/>
+              <stop offset="100%" style="stop-color:#C88800;stop-opacity:0"/>
+            </linearGradient>
+            <radialGradient id="aGlow" cx="47%" cy="42%" r="52%">
+              <stop offset="0%"  style="stop-color:#C88800;stop-opacity:0.38"/>
+              <stop offset="100%" style="stop-color:#C88800;stop-opacity:0"/>
+            </radialGradient>
+            <filter id="aBlur"><feGaussianBlur stdDeviation="1.8"/></filter>
+            <clipPath id="aClip">
+              <rect x="20" y="20" width="360" height="360" rx="80"/>
+            </clipPath>
+          </defs>
+          <rect x="20" y="20" width="360" height="360" rx="80" fill="url(#aNavy)"/>
+          <g clip-path="url(#aClip)">
+            <rect x="20" y="20" width="360" height="360" fill="url(#aNavy)"/>
+            <ellipse cx="188" cy="182" rx="148" ry="132" fill="url(#aGlow)"/>
+            <circle cx="184" cy="168" r="128" fill="url(#aGold)"/>
+            <circle cx="184" cy="168" r="128" fill="url(#aSheen)"/>
+            <path d="M 20 228 Q 85 200 152 218 Q 218 236 282 212 Q 336 194 380 210 L 380 380 L 20 380 Z" fill="url(#aWater)"/>
+            <path d="M 20 228 Q 85 200 152 218 Q 218 236 282 212 Q 336 194 380 210"
+                  fill="none" stroke="url(#aHorizon)" stroke-width="5" opacity="0.6" filter="url(#aBlur)"/>
+            <path d="M 20 228 Q 85 200 152 218 Q 218 236 282 212 Q 336 194 380 210"
+                  fill="none" stroke="#8ab8e8" stroke-width="0.9" opacity="0.35"/>
+            <rect x="20" y="310" width="360" height="70" fill="#0a1530" opacity="0.35"/>
+          </g>
+          <rect x="20" y="20" width="360" height="360" rx="80" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.06"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- ─── GAMES ─── -->
+<section>
+  <div class="reveal">
+    <p class="section-label">Games & Apps</p>
+    <h2 class="section-title">What I'm <span>building</span></h2>
+
+    <div class="game-card" style="margin-top: 2.5rem;">
+      <div class="game-icon">🧳</div>
+      <div class="game-info">
+        <h3 class="game-name">Pack My Suitcase</h3>
+        <p class="game-desc">
+          A clever puzzle game about the art of packing. Fit everything into your suitcase — 
+          every item, every trip, every level a new spatial challenge. Simple to learn, 
+          surprisingly deep to master.
+        </p>
+        <span class="coming-soon-badge">Coming Soon</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- ─── CONTACT ─── -->
+<section class="contact-section">
+  <div class="reveal">
+    <p class="section-label">Connect</p>
+    <h2 class="section-title">Stay in <span>touch</span></h2>
+    <p class="section-body" style="margin: 0 auto 0.5rem; text-align: center;">
+      Follow along as we build. First release coming soon.
+    </p>
+
+    <div class="social-links">
+
+      <!-- Email -->
+      <a href="/cdn-cgi/l/email-protection#8deee2e3f9eceef9cdffe5e4e3e8eae2e1e9fef9f8e9e4e2a3eee2e0" class="social-link">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+        <span class="__cf_email__" data-cfemail="02616d6c7663617642706a6b6c67656d6e66717677666b6d2c616d6f">[email&#160;protected]</span>
+      </a>
+
+      <!-- Twitter/X -->
+      <a href="https://x.com/RhinegoldStudio" target="_blank" rel="noopener" class="social-link">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+        @RhinegoldStudio
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://instagram.com/rhinegoldstudio" target="_blank" rel="noopener" class="social-link">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+        @rhinegoldstudio
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <p>© 2026 rhinegold studio · <a href="mailto:contact@rhinegoldstudio.com">contact@rhinegoldstudio.com</a></p>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Generate stars
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2 + 0.5;
+    s.style.cssText = `
+      width:${size}px;      height:${size}px;
+      top:${Math.random()*65}%;
+      left:${Math.random()*100}%;
+      --dur:${2+Math.random()*4}s;
+      --delay:${-Math.random()*6}s;
+      --min-op:${0.05+Math.random()*0.1};
+      --max-op:${0.3+Math.random()*0.5};
+    `;
+    starsEl.appendChild(s);
+  }
+
+  // Reveal on scroll - low threshold so sections show easily
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+  reveals.forEach(r => observer.observe(r));
+
+  // Trigger any sections already in view on load
+  setTimeout(() => {
+    reveals.forEach(r => {
+      const rect = r.getBoundingClientRect();
+      if (rect.top < window.innerHeight) r.classList.add('visible');
+    });
+  }, 100);
+</script>
+</body>
+</html>
