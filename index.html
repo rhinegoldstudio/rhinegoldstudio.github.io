@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="cf-2fa-verify" content="disable-email-obfuscation"/>
   <title>Rhinegold Studio</title>
   <meta name="description" content="Rhinegold Studio — Independent mobile games & apps. Play more. Learn more. Explore more."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -627,17 +628,17 @@
     <p class="section-label">Connect</p>
     <h2 class="section-title">Stay in <span>touch</span></h2>
     <p class="section-body" style="margin: 0 auto 0.5rem; text-align: center;">
-      Follow along as we build. First release coming soon.
+      Follow along as I build. First release coming soon.
     </p>
 
     <div class="social-links">
 
-      <!-- Email -->
-      <a href="/cdn-cgi/l/email-protection#8deee2e3f9eceef9cdffe5e4e3e8eae2e1e9fef9f8e9e4e2a3eee2e0" class="social-link">
+      <!-- Email - JS rendered to bypass Cloudflare obfuscation -->
+      <a href="#" id="emailLink" class="social-link" onclick="window.location.href='mai'+'lto:'+'contact'+'@'+'rhinegoldstudio.com';return false;">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path d="M20 4H4C2.9 4 2 4.9 2 6v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
         </svg>
-        <span class="__cf_email__" data-cfemail="02616d6c7663617642706a6b6c67656d6e66717677666b6d2c616d6f">[email&#160;protected]</span>
+        <span id="emailDisplay"></span>
       </a>
 
       <!-- Twitter/X -->
@@ -662,10 +663,18 @@
 
 <!-- ─── FOOTER ─── -->
 <footer>
-  <p>© 2026 rhinegold studio · <a href="mailto:contact@rhinegoldstudio.com">contact@rhinegoldstudio.com</a></p>
+  <p>© 2026 rhinegold studio · <span id="footerEmail"></span></p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+  // Render email addresses to bypass Cloudflare obfuscation
+  const u = 'contact', d = 'rhinegoldstudio.com';
+  const email = u + '@' + d;
+  const emailDisplay = document.getElementById('emailDisplay');
+  if (emailDisplay) emailDisplay.textContent = email;
+  const footerEmail = document.getElementById('footerEmail');
+  if (footerEmail) footerEmail.innerHTML = '<a href="mailto:'+email+'" style="color:inherit;text-decoration:none;">'+email+'</a>';
+
   // Generate stars
   const starsEl = document.getElementById('stars');
   for (let i = 0; i < 80; i++) {
@@ -695,14 +704,3 @@
     });
   }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
   reveals.forEach(r => observer.observe(r));
-
-  // Trigger any sections already in view on load
-  setTimeout(() => {
-    reveals.forEach(r => {
-      const rect = r.getBoundingClientRect();
-      if (rect.top < window.innerHeight) r.classList.add('visible');
-    });
-  }, 100);
-</script>
-</body>
-</html>
