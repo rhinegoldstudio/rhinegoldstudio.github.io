@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Impressum — Rhinegold Studio</title>
+  <meta name="description" content="Impressum von Rhinegold Studio"/>
+  <meta name="robots" content="noindex, follow"/>
+  <link rel="canonical" href="https://rhinegoldstudio.com/impressum.html"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #080d1a;
+      color: #b0bcd8;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.05rem;
+      line-height: 1.8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    header a {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #D4980A;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    header a:hover { color: #F2C840; }
+
+    main {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+      flex: 1;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      color: #e8e0d0;
+      margin-bottom: 0.3rem;
+      line-height: 1.1;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #e8e0d0;
+      margin: 2rem 0 0.6rem;
+    }
+
+    p, address { margin-bottom: 0.8rem; font-style: normal; }
+
+    a { color: #8a9bc0; text-decoration: underline; }
+    a:hover { color: #c8d0e0; }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin: 3rem 0;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.82rem;
+      color: #4a5a7a;
+    }
+
+    footer a { color: #4a5a7a; text-decoration: none; }
+    footer a:hover { color: #8a9bc0; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/">← rhinegold studio</a>
+</header>
+
+<main>
+  <h1>Impressum</h1>
+
+  <p>Angaben gemäß § 5 TMG</p>
+
+  <h2>Verantwortlich</h2>
+  <address>
+    Alexander Fuchs<br>
+    Elsa-Brändström-Str. 41<br>
+    72762 Reutlingen<br>
+    Deutschland
+  </address>
+
+  <h2>Kontakt</h2>
+  <p>
+    E-Mail: <span id="impEmail"></span>
+  </p>
+
+  <div class="divider"></div>
+
+  <h2>Haftung für Inhalte</h2>
+  <p>
+    Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den
+    allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht
+    verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen
+    zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+  </p>
+
+  <h2>Haftung für Links</h2>
+  <p>
+    Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
+    Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der
+    verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+  </p>
+
+  <h2>Urheberrecht</h2>
+  <p>
+    Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
+    Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb
+    der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw.
+    Erstellers.
+  </p>
+</main>
+
+<footer>
+  <p>© 2026 rhinegold studio · <a href="/">rhinegoldstudio.com</a> · <a href="/privacy.html">Datenschutz</a></p>
+</footer>
+
+<script>
+  const u = 'contact', d = 'rhinegoldstudio.com';
+  const el = document.getElementById('impEmail');
+  if (el) el.innerHTML = '<a href="mai'+'lto:'+u+'@'+d+'">'+u+'@'+d+'</a>';
+</script>
+
+</body>
+</html>
