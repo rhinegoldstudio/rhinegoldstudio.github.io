@@ -42,17 +42,24 @@
   </script>
   <meta name="google-site-verification" content="jN00pqPhR5lYWBT37zgKumaSXBwyBmlZAKFlrVB5Y2w" />
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Cookiebot CMP - must be first script in head -->
+  <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="45b9fc24-b47a-4e2a-b9c9-682d94d6433d" data-blockingmode="auto" type="text/javascript"></script>
+
+  <!-- Google tag (gtag.js) - consent-based, controlled by Cookiebot -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q6HFL73093"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-Q6HFL73093', {
-      'anonymize_ip': true,
-      'client_storage': 'none',
-      'analytics_storage': 'denied'
+
+    // Default consent state - deny until user accepts via Cookiebot
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied',
+      'wait_for_update': 500
     });
+
+    gtag('js', new Date());
+    gtag('config', 'G-Q6HFL73093', { 'anonymize_ip': true });
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -277,10 +284,8 @@
     }
 
     .section-title span {
-      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-mid));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--white);
+      -webkit-text-fill-color: var(--white);
     }
 
     .section-body {
