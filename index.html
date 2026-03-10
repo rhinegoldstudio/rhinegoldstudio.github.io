@@ -45,19 +45,22 @@
   <!-- Cookiebot CMP - must be first script in head -->
   <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="45b9fc24-b47a-4e2a-b9c9-682d94d6433d" data-blockingmode="auto" type="text/javascript"></script>
 
-  <!-- Google tag (gtag.js) - consent-based, controlled by Cookiebot -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q6HFL73093"></script>
+  <!-- Google Consent Mode v2 - default deny, must run before any tracking scripts -->
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-
-    // Default consent state - deny until user accepts via Cookiebot
     gtag('consent', 'default', {
       'analytics_storage': 'denied',
       'ad_storage': 'denied',
       'wait_for_update': 500
     });
+  </script>
 
+  <!-- Google tag (gtag.js) - blocked by Cookiebot until statistics consent granted -->
+  <script type="text/plain" data-cookiecategory="statistics" async src="https://www.googletagmanager.com/gtag/js?id=G-Q6HFL73093"></script>
+  <script type="text/plain" data-cookiecategory="statistics">
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-Q6HFL73093', { 'anonymize_ip': true });
   </script>
